@@ -46,9 +46,9 @@ function DashboardContent() {
       <header className="border-b border-line bg-surface/80 backdrop-blur dark:border-line-dark dark:bg-surface-dark/80">
         <div className="mx-auto flex max-w-6xl flex-col gap-4 px-4 py-5 sm:flex-row sm:items-center sm:justify-between sm:px-6">
           <div>
-            <p className="font-mono text-xs uppercase tracking-widest text-clay-500">Analytics Dashboard</p>
+            <p className="font-mono text-xs uppercase tracking-widest text-teal-500 dark:text-teal-400">Analytics Dashboard</p>
             <h1 className="font-display text-2xl font-semibold tracking-tight text-ink-900 dark:text-ink-900-dark sm:text-3xl">
-              Uzbekistan Population Dynamics
+              Uzbekistan Poplation Dynamics
             </h1>
             <p className="mt-1 text-sm text-ink-500 dark:text-ink-500-dark">1991 - 2026 growth overview</p>
           </div>
@@ -96,28 +96,24 @@ function DashboardContent() {
                     label="Population"
                     value={formatNumber(stats.currentPopulation)}
                     caption={`As of ${stats.currentYear}`}
-                    accent="teal"
                     delay={0}
                   />
                   <StatCard
                     label="Initial Population"
                     value={formatNumber(stats.initialPopulation)}
                     caption={`In ${stats.initialYear}`}
-                    accent="teal"
                     delay={60}
                   />
                   <StatCard
                     label="Total Growth"
                     value={`+${formatNumber(stats.totalGrowth)}`}
                     caption="People added"
-                    accent="clay"
                     delay={120}
                   />
                   <StatCard
                     label="Growth %"
                     value={`${stats.growthPercent.toFixed(1)}%`}
                     caption={`Since ${stats.initialYear}`}
-                    accent="clay"
                     delay={180}
                   />
                 </div>
@@ -141,9 +137,9 @@ function DashboardContent() {
         )}
       </main>
 
-      <footer className="mx-auto max-w-6xl px-4 py-8 text-center text-xs text-ink-300 dark:text-ink-500-dark sm:px-6">
-        Data compiled from World Bank, UN World Population Prospects, and Macrotrends for demonstration purposes.
-      </footer>
+      {/*<footer className="mx-auto max-w-6xl px-4 py-8 text-center text-xs text-ink-300 dark:text-ink-500-dark sm:px-6">
+
+      </footer>*/}
     </div>
   );
 }

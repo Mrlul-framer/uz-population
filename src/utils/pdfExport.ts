@@ -30,7 +30,7 @@ export async function exportDashboardToPdf(
   const contentWidth = PAGE_WIDTH - MARGIN * 2;
   let cursorY = MARGIN;
 
-  doc.setFillColor(20, 108, 116);
+  doc.setFillColor(103, 173, 44);
   doc.rect(0, 0, PAGE_WIDTH, 28, 'F');
 
   doc.setTextColor(255, 255, 255);
@@ -43,7 +43,7 @@ export async function exportDashboardToPdf(
   doc.text(`Period: ${range.start} - ${range.end}`, MARGIN, 22);
 
   cursorY = 38;
-  doc.setTextColor(28, 43, 46);
+  doc.setTextColor(16, 20, 15);
 
   const canvas = await html2canvas(chartElement, {
     scale: 2,
@@ -56,7 +56,7 @@ export async function exportDashboardToPdf(
   doc.addImage(imgData, 'PNG', MARGIN, cursorY, imgWidth, imgHeight);
   cursorY += imgHeight + 10;
 
-  doc.setDrawColor(228, 223, 211);
+  doc.setDrawColor(223, 228, 213);
   doc.setLineWidth(0.3);
   doc.line(MARGIN, cursorY, PAGE_WIDTH - MARGIN, cursorY);
   cursorY += 8;
@@ -82,31 +82,31 @@ export async function exportDashboardToPdf(
 
     doc.setFont('helvetica', 'normal');
     doc.setFontSize(9);
-    doc.setTextColor(95, 109, 111);
+    doc.setTextColor(98, 106, 90);
     doc.text(label, x, y);
 
     doc.setFont('helvetica', 'bold');
     doc.setFontSize(13);
-    doc.setTextColor(28, 43, 46);
+    doc.setTextColor(16, 20, 15);
     doc.text(value, x, y + 6);
   });
 
   cursorY += Math.ceil(rows.length / 2) * 16 + 6;
 
-  doc.setDrawColor(228, 223, 211);
+  doc.setDrawColor(223, 228, 213);
   doc.line(MARGIN, cursorY, PAGE_WIDTH - MARGIN, cursorY);
   cursorY += 6;
 
   doc.setFont('helvetica', 'italic');
   doc.setFontSize(8);
-  doc.setTextColor(140, 150, 152);
+  doc.setTextColor(147, 153, 127);
   doc.text(`Generated on ${formatDate(new Date())}`, MARGIN, cursorY);
 
   const pageCount = doc.getNumberOfPages();
   for (let i = 1; i <= pageCount; i++) {
     doc.setPage(i);
     doc.setFontSize(8);
-    doc.setTextColor(140, 150, 152);
+    doc.setTextColor(147, 153, 127);
     doc.text(
       `Page ${i} of ${pageCount}`,
       PAGE_WIDTH - MARGIN,

@@ -24,7 +24,7 @@ export function DataTable({ data }: DataTableProps) {
         className="flex w-full items-center justify-between px-5 py-4 text-left"
       >
         <span className="font-display text-base font-medium text-ink-900 dark:text-ink-900-dark">
-          Year-by-year data
+          Yilma-yil tahlillar
         </span>
         <svg
           width="18"

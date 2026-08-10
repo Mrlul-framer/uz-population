@@ -21,17 +21,17 @@ export function PopulationChart({ data }: PopulationChartProps) {
   const option: EChartsOption = useMemo(() => {
     const years = data.map((point) => point.year);
     const populations = data.map((point) => point.population);
-    const axisColor = isDark ? '#24393d' : '#e4dfd3';
-    const textColor = isDark ? '#a3b0b1' : '#5f6d6f';
+    const axisColor = isDark ? '#232b22' : '#dfe4d5';
+    const textColor = isDark ? '#9aa68f' : '#626a5a';
 
     return {
       backgroundColor: 'transparent',
       grid: { left: 56, right: 24, top: 24, bottom: 40 },
       tooltip: {
         trigger: 'axis',
-        backgroundColor: isDark ? '#16262a' : '#ffffff',
-        borderColor: isDark ? '#24393d' : '#e4dfd3',
-        textStyle: { color: isDark ? '#edeae2' : '#1c2b2e' },
+        backgroundColor: isDark ? '#141a15' : '#ffffff',
+        borderColor: isDark ? '#232b22' : '#dfe4d5',
+        textStyle: { color: isDark ? '#eaf0e3' : '#10140f' },
         formatter: (params: unknown) => {
           const p = (params as Array<{ axisValue: string; data: number }>)[0];
           return `<div style="font-family: Manrope, sans-serif;"><strong>${p.axisValue}</strong><br/>Population: ${new Intl.NumberFormat('en-US').format(p.data)}</div>`;
@@ -64,8 +64,8 @@ export function PopulationChart({ data }: PopulationChartProps) {
           symbol: 'circle',
           symbolSize: 6,
           showSymbol: false,
-          lineStyle: { width: 3, color: '#146c74' },
-          itemStyle: { color: '#146c74', borderWidth: 2, borderColor: '#ffffff' },
+          lineStyle: { width: 3, color: '#67ad2c' },
+          itemStyle: { color: '#67ad2c', borderWidth: 2, borderColor: '#ffffff' },
           areaStyle: {
             color: {
               type: 'linear',
@@ -74,14 +74,14 @@ export function PopulationChart({ data }: PopulationChartProps) {
               x2: 0,
               y2: 1,
               colorStops: [
-                { offset: 0, color: isDark ? 'rgba(20,108,116,0.45)' : 'rgba(20,108,116,0.25)' },
-                { offset: 1, color: 'rgba(20,108,116,0)' },
+                { offset: 0, color: isDark ? 'rgba(103,173,44,0.5)' : 'rgba(103,173,44,0.22)' },
+                { offset: 1, color: 'rgba(103,173,44,0)' },
               ],
             },
           },
           emphasis: {
             focus: 'series',
-            itemStyle: { color: '#c4622d', borderColor: '#ffffff', borderWidth: 2 },
+            itemStyle: { color: '#7cc93f', borderColor: '#ffffff', borderWidth: 2 },
           },
         },
       ],

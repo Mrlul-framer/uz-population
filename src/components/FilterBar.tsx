@@ -1,4 +1,5 @@
-import { useState } from 'react';
+
+import { useEffect, useState } from 'react';
 import type { PresetRange, YearRange } from '../types/population';
 
 interface FilterBarProps {
@@ -19,6 +20,12 @@ export function FilterBar({ preset, range, bounds, onPresetChange, onCustomRange
   const [customStart, setCustomStart] = useState(range.start);
   const [customEnd, setCustomEnd] = useState(range.end);
   const [rangeError, setRangeError] = useState<string | null>(null);
+
+  useEffect(() => {
+    setCustomStart(range.start);
+    setCustomEnd(range.end);
+    setRangeError(null);
+  }, [range.start, range.end]);
 
   const applyCustomRange = () => {
     if (customStart >= customEnd) {
@@ -78,14 +85,16 @@ export function FilterBar({ preset, range, bounds, onPresetChange, onCustomRange
             onClick={applyCustomRange}
             className={`rounded-lg px-3 py-1.5 text-sm font-medium transition-colors ${
               preset === 'custom'
-                ? 'bg-clay-500 text-white hover:bg-clay-600'
-                : 'bg-clay-500/10 text-clay-500 hover:bg-clay-500 hover:text-white'
+                ? 'bg-teal-500 text-white hover:bg-teal-600'
+                : 'bg-teal-50 text-teal-600 hover:bg-teal-100 dark:bg-teal-500/10 dark:text-teal-400 dark:hover:bg-teal-500/20'
             }`}
           >
             Custom
           </button>
         </div>
-        {rangeError && <p className="text-xs text-clay-500">{rangeError}</p>}
+        {rangeError && (
+          <p className="text-xs text-danger-500 dark:text-danger-400-dark">{rangeError}</p>
+        )}
       </div>
     </div>
   );

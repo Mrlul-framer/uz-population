@@ -1,6 +1,8 @@
 import axios, { type AxiosAdapter, type AxiosResponse } from 'axios';
 import populationDataset from '../data/population.json';
 
+console.log(populationDataset.data)
+
 const NETWORK_DELAY_MS = 650;
 
 function shouldSimulateError(): boolean {
