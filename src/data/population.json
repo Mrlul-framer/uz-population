@@ -1,0 +1,152 @@
+{
+  "country": "Uzbekistan",
+  "unit": "people",
+  "source": "Compiled from World Bank (SP.POP.TOTL), UN World Population Prospects 2024 Revision, and Macrotrends historical series. 2026 figure is a UN medium-variant projection.",
+  "lastUpdated": "2026-08-01",
+  "data": [
+    {
+      "year": 1991,
+      "population": 20510000
+    },
+    {
+      "year": 1992,
+      "population": 21058000
+    },
+    {
+      "year": 1993,
+      "population": 21621000
+    },
+    {
+      "year": 1994,
+      "population": 22198000
+    },
+    {
+      "year": 1995,
+      "population": 22791000
+    },
+    {
+      "year": 1996,
+      "population": 23400000
+    },
+    {
+      "year": 1997,
+      "population": 23706000
+    },
+    {
+      "year": 1998,
+      "population": 24017000
+    },
+    {
+      "year": 1999,
+      "population": 24331000
+    },
+    {
+      "year": 2000,
+      "population": 24650000
+    },
+    {
+      "year": 2001,
+      "population": 24980000
+    },
+    {
+      "year": 2002,
+      "population": 25315000
+    },
+    {
+      "year": 2003,
+      "population": 25655000
+    },
+    {
+      "year": 2004,
+      "population": 25998000
+    },
+    {
+      "year": 2005,
+      "population": 26347000
+    },
+    {
+      "year": 2006,
+      "population": 26700000
+    },
+    {
+      "year": 2007,
+      "population": 27251000
+    },
+    {
+      "year": 2008,
+      "population": 27813000
+    },
+    {
+      "year": 2009,
+      "population": 28387000
+    },
+    {
+      "year": 2010,
+      "population": 28973000
+    },
+    {
+      "year": 2011,
+      "population": 29348000
+    },
+    {
+      "year": 2012,
+      "population": 29729000
+    },
+    {
+      "year": 2013,
+      "population": 30114000
+    },
+    {
+      "year": 2014,
+      "population": 30504000
+    },
+    {
+      "year": 2015,
+      "population": 30900000
+    },
+    {
+      "year": 2016,
+      "population": 31300000
+    },
+    {
+      "year": 2017,
+      "population": 31860000
+    },
+    {
+      "year": 2018,
+      "population": 32430000
+    },
+    {
+      "year": 2019,
+      "population": 33010000
+    },
+    {
+      "year": 2020,
+      "population": 33600000
+    },
+    {
+      "year": 2021,
+      "population": 34248000
+    },
+    {
+      "year": 2022,
+      "population": 34939000
+    },
+    {
+      "year": 2023,
+      "population": 35164000
+    },
+    {
+      "year": 2024,
+      "population": 35674000
+    },
+    {
+      "year": 2025,
+      "population": 36159000
+    },
+    {
+      "year": 2026,
+      "population": 36622000
+    }
+  ]
+}
