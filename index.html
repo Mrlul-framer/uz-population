@@ -11,7 +11,12 @@
         var theme = stored === 'light' || stored === 'dark'
           ? stored
           : (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-        if (theme === 'dark') document.documentElement.classList.add('dark');
+        if (theme === 'dark') {
+          document.documentElement.classList.add('dark');
+          document.documentElement.style.backgroundColor = '#0b0f0c';
+        } else {
+          document.documentElement.style.backgroundColor = '#f6f8f4';
+        }
       })();
     </script>
   </head>

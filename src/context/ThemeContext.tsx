@@ -1,3 +1,4 @@
+
 import { createContext, useContext, useEffect, useState, type ReactNode } from 'react';
 
 type Theme = 'light' | 'dark';
@@ -19,6 +20,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     const root = window.document.documentElement;
     root.classList.toggle('dark', theme === 'dark');
+    root.style.removeProperty('background-color');
     window.localStorage.setItem('uz-population-theme', theme);
   }, [theme]);
 

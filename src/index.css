@@ -1,46 +1,46 @@
 @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
 @import "tailwindcss";
 
-
-
-
 @theme {
   --font-display: 'Fraunces', serif;
   --font-sans: 'Manrope', system-ui, sans-serif;
   --font-mono: 'IBM Plex Mono', monospace;
 
-  --color-paper: #f7f5f0;
+  --color-paper: #f6f8f4;
   --color-surface: #ffffff;
-  --color-teal-50: #eef5f5;
-  --color-teal-100: #d3e6e6;
-  --color-teal-400: #2f8f97;
-  --color-teal-500: #146c74;
-  --color-teal-600: #0d4a50;
-  --color-teal-700: #0a373c;
-  --color-clay-400: #d97f4e;
-  --color-clay-500: #c4622d;
-  --color-clay-600: #9e4c22;
-  --color-ink-900: #1c2b2e;
-  --color-ink-700: #354548;
-  --color-ink-500: #5f6d6f;
-  --color-ink-300: #8c9698;
-  --color-line: #e4dfd3;
+  --color-teal-50: #eef8e4;
+  --color-teal-100: #dcf1c9;
+  --color-teal-400: #7cc93f;
+  --color-teal-500: #67ad2c;
+  --color-teal-600: #4f8721;
+  --color-teal-700: #3c6819;
+  --color-ink-900: #10140f;
+  --color-ink-700: #33392f;
+  --color-ink-500: #626a5a;
+  --color-ink-300: #93997f;
+  --color-line: #dfe4d5;
+  --color-danger-400: #e0574a;
+  --color-danger-500: #c94236;
 
-  --color-paper-dark: #0f1b1d;
-  --color-surface-dark: #16262a;
-  --color-line-dark: #24393d;
-  --color-ink-900-dark: #edeae2;
-  --color-ink-500-dark: #a3b0b1;
+  --color-paper-dark: #0b0f0c;
+  --color-surface-dark: #141a15;
+  --color-line-dark: #232b22;
+  --color-ink-900-dark: #eaf0e3;
+  --color-ink-500-dark: #9aa68f;
+  --color-danger-400-dark: #e0574a;
+  --color-danger-500-dark: #f07364;
 }
 
 @custom-variant dark (&:where(.dark, .dark *));
 
 html {
   color-scheme: light;
+  background-color: var(--color-paper);
 }
 
 html.dark {
   color-scheme: dark;
+  background-color: var(--color-paper-dark);
 }
 
 body {
@@ -61,15 +61,7 @@ html.dark body {
 }
 
 .tile-rule {
-  background-image: repeating-linear-gradient(
-    135deg,
-    var(--color-teal-500) 0px,
-    var(--color-teal-500) 6px,
-    var(--color-clay-500) 6px,
-    var(--color-clay-500) 12px,
-    var(--color-teal-600) 12px,
-    var(--color-teal-600) 18px
-  );
+  background-color: var(--color-teal-500);
 }
 
 @keyframes rise {
