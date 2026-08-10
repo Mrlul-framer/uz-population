@@ -1,78 +1,80 @@
-# Uzbekistan Population Dynamics
+# Oʻzbekiston Aholi Dinamikasi
 
-An analytics dashboard visualizing the growth of Uzbekistan's population from 1991 to 2026, built as a frontend developer test task. The app renders a stat overview, a responsive line chart, a filterable data table, and lets users export the dashboard as an A4 PDF or download the underlying data as CSV.
+Oʻzbekistonning 1991–2026 yillar oralig'idagi aholi oʻsishini vizual koʻrsatadigan analitika dashboard qilindi. Ilova statistika koʻrinishini, responsive line chart'ni, filtrlash mumkin boʻlgan jadvalni chizadi va dashboard'ni A4 PDF sifatida yoki asosiy ma'lumotlarni CSV qilib yuklab olish imkonyatini beradi.
 
-## Tech stack
+## Texnologiyalar ishlatild
 
-- **React 19 + TypeScript** - component architecture and type safety
-- **Vite** - build tooling and dev server
-- **Tailwind CSS v4** - styling, design tokens defined in `src/index.css`
-- **Apache ECharts** (`echarts-for-react`) - the population line chart
-- **Axios** - HTTP client, configured with a custom mock adapter (see below)
-- **jsPDF + html2canvas** - client-side PDF generation
-- **PapaParse** - CSV generation
+- **React 19 + TypeScript** — komponentlar arxitekturasi va type safety uchun
+- **Vite** — build va dev server uchun
+- **Tailwind CSS v4** — stillar, design token'lar `src/index.css` da yozilgan
+- **Apache ECharts** (`echarts-for-react`) — aholi oʻsishi line chart'i uchun
+- **Axios** — HTTP client, o'zimizning mock adapter bilan sozlangan (pastda tushuntirilgan)
+- **jsPDF + html2canvas** — client tomonda PDF yaratish uchun
+- **PapaParse** — CSV yaratish uchun
 
-## Getting started
+## Ishga tushirish
 
-\`\`\`bash
+```bash
 npm install
 npm run dev
-\`\`\`
+```
 
-The app runs at `http://localhost:5173`.
 
-Other scripts:
+Boshqa scriptlar:
 
-\`\`\`bash
-npm run build     # type-check and produce a production build in dist/
-npm run preview   # preview the production build locally
-npm run lint      # run oxlint
-\`\`\`
+```bash
+npm run build    
+npm run preview  
+npm run lint     
+```
 
-## Project structure
+## Loyiha strukturasi
 
-\`\`\`
+```
 src/
   api/            axios instance + mock adapter, population API service
-  components/     UI building blocks (chart, filters, cards, states, table)
+  components/     UI qismlari (chart, filterlar, cardlar, holatlar, jadval)
   context/        theme (dark/light) context
-  data/           static population dataset used by the mock API
+  data/           mock API uchun statik aholi dataseti
   hooks/          usePopulationData, useUrlFilterState
-  types/          shared TypeScript types
+  types/          umumiy TypeScript type'lar
   utils/          PDF export, CSV export
-\`\`\`
+```
 
 ## Mock API
 
-There is no real backend. `src/api/client.ts` creates an Axios instance with a **custom adapter** that intercepts requests the same way a real HTTP call would, waits ~650ms to simulate network latency, and resolves with the local dataset in `src/data/population.json`. `src/api/populationApi.ts` exposes a `fetchPopulation()` function that the rest of the app calls exactly as it would call a real `GET /api/population` endpoint - so swapping in a real backend later only means replacing the adapter, not any application code.
+Bu yerda real backend yoʻq. `src/api/client.ts` fayli Axios instance yaratadi, unda **maxsus adapter** bor — u so'rovlarni xuddi real HTTP call kabi ushlaydi, ~650ms tarmoq kechikishini simulyatsiya qiladi va `src/data/population.json` dagi lokal datasetni qaytaradi. `src/api/populationApi.ts` esa `fetchPopulation()` funksiyasini beradi, qolgan qismlar uni xuddi real `GET /api/population` endpoint'ni chaqirgandek chaqiradi — shu sababli kelajakda real backend ulash uchun faqat adapterni almashtirish kifoya, ilovaning boshqa kodiga tegish shart emas.
 
-For testing UI states, two query params force specific responses:
+UI holatlarini test qilish uchun ikkita query param bor:
 
-- `?simulateError=1` - forces the request to reject (used to see the error state)
-- `?simulateEmpty=1` - forces the request to resolve with an empty dataset (used to see the empty state)
+- `?simulateError=1` — so'rovni majburan reject qildiradi (error state'ni koʻrish uchun)
+- `?simulateEmpty=1` — so'rovni bo'sh dataset bilan resolve qildiradi (empty state'ni koʻrish uchun)
 
-### Data source
+### Ma'lumotlar manbasi
 
-The population figures are compiled from publicly available World Bank (`SP.POP.TOTL`), UN World Population Prospects (2024 Revision), and Macrotrends historical series, interpolated between known yearly anchor points for a smooth, realistic curve. The 2026 value is a projection. This is demo data for the purposes of this task, not an official government dataset - see `src/data/population.json` for the `source` field.
+Aholi soni bo'yicha ma'lumotlar ochiq manbalardan — World Bank (`SP.POP.TOTL`), UN World Population Prospects (2024 Revision) va Macrotrends tarixiy seriyalaridan — yig'ilgan, ma'lum yillik nuqtalar orasida silliq va realistik egri chiziq hosil qilish uchun interpolatsiya qilingan. 2026-yil qiymati — bashorat. Malumotlar Demo sifatida yaradim — `source` maydonini `src/data/population.json` da joylashgan.
 
-## PDF export
+## PDF export, yukalab olihs
 
-Clicking **Download PDF**:
+1. `html2canvas` yordamida statistika + chart qismi rasmga olinadi.
+2. `jsPDF` bilan A4 hujjat quriladi: sarlavha ("Uzbekistan Population Dynamics"), tanlangan yillar oralig'i, rasmga olingan chart, asosiy ko'rsatkichlar jadvali (aholi soni, boshlang'ich aholi soni, umumiy o'sish, o'sish %) va yaratilgan vaqt.
+3. Fayl `uzbekistan-population-1991-2026.pdf` nomi bilan saqlanadi.
 
-1. Captures the stats + chart section of the dashboard with `html2canvas`.
-2. Builds an A4 document with `jsPDF`: a title header ("Uzbekistan Population Dynamics"), the selected year range, the captured chart image, a key-figures table (population, initial population, total growth, growth %), and a generated-on timestamp.
-3. Saves the file as `uzbekistan-population-1991-2026.pdf`.
+Export har doim shu nom bilan saqlanadi, hozirgi tanlangan filtr oralig'idan qat'i nazar — bu topshiriq talabiga ko'ra shunday.
 
-The export always uses this filename, regardless of the currently selected filter range, per the task spec.
+## Xususiyatlar
 
-## Features
+- Yillar bo'yicha aholi soni line chart'i (ECharts) — hover tooltip'lar, silliq egri chiziq va area fill bilan
+- Stat card'lar: hozirgi aholi soni, boshlang'ich aholi soni, umumiy o'sish, o'sish %
+- Oraliq filtrlash: uchta tayyor variant (1991-2026, 2000-2026, 2010-2026) + tekshiriladigan custom oraliq
+- Loading (skeleton'lar), error (retry bilan) va empty holatlar
+- Responsive dizayn — desktop va mobil uchun
+- Dark / light rejim almashtirish (`localStorage`da saqlanadi)
+- Qidiriladigan, yig'iladigan (collapsible) yil-boyicha jadval
+- Filtrlangan oraliq uchun CSV export
+- Filtr holati URL query string'da saqlanadi — shu sababli filtrlangan ko'rinishni ulashish/bookmark qilish mumkin
 
-- Line chart (ECharts) of population by year, with hover tooltips, smooth curve, and area fill
-- Stat cards: current population, initial population, total growth, growth %
-- Range filtering: three presets (1991-2026, 2000-2026, 2010-2026) plus a validated custom range
-- Loading (skeletons), error (with retry), and empty states
-- Responsive layout, desktop and mobile
-- Dark / light mode toggle (persisted to `localStorage`)
-- Searchable, collapsible year-by-year data table
-- CSV export of the currently filtered range
-- Filter state persisted to the URL query string, so a filtered view can be shared/bookmarked
+Tili ingliz tilda qilindi, code da kop joyiga English + Uzb so'zlar yozsam bir oz chalkashib ketaman, ammo bu faqat mening qulayligim uchun,Lekin Uzbek tilini (code syntaxistlaridan tashqari)  hamma yerga ishlata olaman) Muammo emas,
+
+Md file dagi Imloviy Hatolarni inobatga olmimiz) SHoshilinchda Sayqallatirishga majbur bo'ldim,
+Designi Yoqmili bo'lgan Web Page Tayyor
