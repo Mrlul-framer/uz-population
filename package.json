@@ -1,3 +1,4 @@
+
 {
   "name": "uz-population",
   "private": true,
@@ -13,7 +14,6 @@
     "axios": "^1.19.0",
     "echarts": "^6.1.0",
     "echarts-for-react": "^3.0.6",
-    "html2canvas": "^1.4.1",
     "jspdf": "^4.2.1",
     "papaparse": "^5.5.4",
     "react": "^19.2.8",

@@ -1,11 +1,12 @@
 import { useMemo } from 'react';
 import ReactECharts from 'echarts-for-react';
-import type { EChartsOption } from 'echarts';
+import type { EChartsOption, ECharts } from 'echarts';
 import { useTheme } from '../context/ThemeContext';
 import type { PopulationPoint } from '../types/population';
 
 interface PopulationChartProps {
   data: PopulationPoint[];
+  onChartReady?: (instance: ECharts) => void;
 }
 
 function formatCompact(value: number): string {
@@ -14,7 +15,7 @@ function formatCompact(value: number): string {
   return String(value);
 }
 
-export function PopulationChart({ data }: PopulationChartProps) {
+export function PopulationChart({ data, onChartReady }: PopulationChartProps) {
   const { theme } = useTheme();
   const isDark = theme === 'dark';
 
@@ -96,6 +97,7 @@ export function PopulationChart({ data }: PopulationChartProps) {
       style={{ height: 380, width: '100%' }}
       notMerge
       lazyUpdate
+      onChartReady={onChartReady}
     />
   );
 }

@@ -1,5 +1,4 @@
 import jsPDF from 'jspdf';
-import html2canvas from 'html2canvas';
 import type { PopulationStats, YearRange } from '../types/population';
 
 const PDF_FILENAME = 'uzbekistan-population-1991-2026.pdf';
@@ -21,11 +20,12 @@ function formatDate(date: Date): string {
   }).format(date);
 }
 
-export async function exportDashboardToPdf(
-  chartElement: HTMLElement,
+export function exportDashboardToPdf(
+  chartImageDataUrl: string,
+  chartAspectRatio: number,
   stats: PopulationStats,
   range: YearRange
-): Promise<void> {
+): void {
   const doc = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
   const contentWidth = PAGE_WIDTH - MARGIN * 2;
   let cursorY = MARGIN;
@@ -45,15 +45,9 @@ export async function exportDashboardToPdf(
   cursorY = 38;
   doc.setTextColor(16, 20, 15);
 
-  const canvas = await html2canvas(chartElement, {
-    scale: 2,
-    backgroundColor: '#ffffff',
-    logging: false,
-  });
-  const imgData = canvas.toDataURL('image/png');
   const imgWidth = contentWidth;
-  const imgHeight = (canvas.height / canvas.width) * imgWidth;
-  doc.addImage(imgData, 'PNG', MARGIN, cursorY, imgWidth, imgHeight);
+  const imgHeight = imgWidth * chartAspectRatio;
+  doc.addImage(chartImageDataUrl, 'PNG', MARGIN, cursorY, imgWidth, imgHeight);
   cursorY += imgHeight + 10;
 
   doc.setDrawColor(223, 228, 213);

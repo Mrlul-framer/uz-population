@@ -1,4 +1,5 @@
 import { useRef, useState } from 'react';
+import type { ECharts } from 'echarts';
 import { ThemeProvider } from './context/ThemeContext';
 import { usePopulationData } from './hooks/usePopulationData';
 import { useUrlFilterState } from './hooks/useUrlFilterState';
@@ -20,14 +21,19 @@ function DashboardContent() {
   const { preset, range, setPreset, setCustomRange } = useUrlFilterState();
   const { isLoading, error, filteredData, stats, bounds, reload } = usePopulationData(range);
   const [isExportingPdf, setIsExportingPdf] = useState(false);
-  const exportRef = useRef<HTMLDivElement>(null);
+  const chartInstanceRef = useRef<ECharts | null>(null);
 
   const handleExportPdf = async () => {
-    if (!exportRef.current || !stats) return;
+    const chart = chartInstanceRef.current;
+    if (!chart || !stats) return;
     setIsExportingPdf(true);
     try {
+      const dataUrl = chart.getDataURL({ type: 'png', pixelRatio: 2, backgroundColor: '#ffffff' });
+      const width = chart.getWidth();
+      const height = chart.getHeight();
+      const aspectRatio = width > 0 ? height / width : 0.5;
       const { exportDashboardToPdf } = await import('./utils/pdfExport');
-      await exportDashboardToPdf(exportRef.current, stats, range);
+      exportDashboardToPdf(dataUrl, aspectRatio, stats, range);
     } catch (err) {
       console.error('PDF export failed', err);
     } finally {
@@ -48,7 +54,7 @@ function DashboardContent() {
           <div>
             <p className="font-mono text-xs uppercase tracking-widest text-teal-500 dark:text-teal-400">Analytics Dashboard</p>
             <h1 className="font-display text-2xl font-semibold tracking-tight text-ink-900 dark:text-ink-900-dark sm:text-3xl">
-              Uzbekistan Poplation Dynamics
+              Uzbekistan Population Dynamics
             </h1>
             <p className="mt-1 text-sm text-ink-500 dark:text-ink-500-dark">1991 - 2026 growth overview</p>
           </div>
@@ -90,7 +96,7 @@ function DashboardContent() {
             {filteredData.length === 0 || !stats ? (
               <EmptyState onReset={() => setPreset('1991-2026')} />
             ) : (
-              <div ref={exportRef} className="space-y-6 bg-paper dark:bg-paper-dark">
+              <div className="space-y-6">
                 <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
                   <StatCard
                     label="Population"
@@ -127,7 +133,12 @@ function DashboardContent() {
                       {range.start} - {range.end}
                     </span>
                   </div>
-                  <PopulationChart data={filteredData} />
+                  <PopulationChart
+                    data={filteredData}
+                    onChartReady={(instance) => {
+                      chartInstanceRef.current = instance;
+                    }}
+                  />
                 </div>
               </div>
             )}
@@ -138,7 +149,7 @@ function DashboardContent() {
       </main>
 
       {/*<footer className="mx-auto max-w-6xl px-4 py-8 text-center text-xs text-ink-300 dark:text-ink-500-dark sm:px-6">
-
+        footer willadded soon
       </footer>*/}
     </div>
   );
