@@ -1,0 +1,96 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-display: 'Fraunces', serif;
+  --font-sans: 'Manrope', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', monospace;
+
+  --color-paper: #f7f5f0;
+  --color-surface: #ffffff;
+  --color-teal-50: #eef5f5;
+  --color-teal-100: #d3e6e6;
+  --color-teal-400: #2f8f97;
+  --color-teal-500: #146c74;
+  --color-teal-600: #0d4a50;
+  --color-teal-700: #0a373c;
+  --color-clay-400: #d97f4e;
+  --color-clay-500: #c4622d;
+  --color-clay-600: #9e4c22;
+  --color-ink-900: #1c2b2e;
+  --color-ink-700: #354548;
+  --color-ink-500: #5f6d6f;
+  --color-ink-300: #8c9698;
+  --color-line: #e4dfd3;
+
+  --color-paper-dark: #0f1b1d;
+  --color-surface-dark: #16262a;
+  --color-line-dark: #24393d;
+  --color-ink-900-dark: #edeae2;
+  --color-ink-500-dark: #a3b0b1;
+}
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+html {
+  color-scheme: light;
+}
+
+html.dark {
+  color-scheme: dark;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-paper);
+  color: var(--color-ink-900);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+html.dark body {
+  background-color: var(--color-paper-dark);
+  color: var(--color-ink-900-dark);
+}
+
+::selection {
+  background-color: var(--color-teal-500);
+  color: white;
+}
+
+.tile-rule {
+  background-image: repeating-linear-gradient(
+    135deg,
+    var(--color-teal-500) 0px,
+    var(--color-teal-500) 6px,
+    var(--color-clay-500) 6px,
+    var(--color-clay-500) 12px,
+    var(--color-teal-600) 12px,
+    var(--color-teal-600) 18px
+  );
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-rise {
+  animation: rise 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-rise {
+    animation: none;
+  }
+}
+
+*:focus-visible {
+  outline: 2px solid var(--color-teal-500);
+  outline-offset: 2px;
+}
